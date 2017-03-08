@@ -11,6 +11,8 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
@@ -112,19 +114,7 @@ public class ArticleDetailFragment extends Fragment implements
             }
         });
 
-        mScrollView = (ObservableScrollView) mRootView.findViewById(R.id.scrollview);
-        mScrollView.setCallbacks(new ObservableScrollView.Callbacks() {
-            @Override
-            public void onScrollChanged() {
-                mScrollY = mScrollView.getScrollY();
-                getActivityCast().onUpButtonFloorChanged(mItemId, ArticleDetailFragment.this);
-                mPhotoContainerView.setTranslationY((int) (mScrollY - mScrollY / PARALLAX_FACTOR));
-                updateStatusBar();
-            }
-        });
-
         mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
-        mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
 
         mStatusBarColorDrawable = new ColorDrawable(0);
 
@@ -182,6 +172,11 @@ public class ArticleDetailFragment extends Fragment implements
         bylineView.setMovementMethod(new LinkMovementMethod());
         TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
         bodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
+        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout)
+                mRootView.findViewById(R.id.collapsingToolbar);
+        AppBarLayout appBarLayout = (AppBarLayout) mRootView.findViewById(R.id.appBar);
+
+
 
         if (mCursor != null) {
             mRootView.setAlpha(0);
@@ -217,6 +212,26 @@ public class ArticleDetailFragment extends Fragment implements
 
                         }
                     });
+
+            appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                boolean isShow = false;
+                int scrollRange = -1;
+
+                @Override
+                public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                    if (scrollRange == -1) {
+                        scrollRange = appBarLayout.getTotalScrollRange();
+                    }
+                    if (scrollRange + verticalOffset == 0) {
+                        collapsingToolbarLayout.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
+                        isShow = true;
+                    } else if(isShow) {
+                        collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                        isShow = false;
+                    }
+                }
+            });
+
         } else {
             mRootView.setVisibility(View.GONE);
             titleView.setText("N/A");
@@ -256,13 +271,6 @@ public class ArticleDetailFragment extends Fragment implements
     }
 
     public int getUpButtonFloor() {
-        if (mPhotoContainerView == null || mPhotoView.getHeight() == 0) {
-            return Integer.MAX_VALUE;
-        }
-
-        // account for parallax
-        return mIsCard
-                ? (int) mPhotoContainerView.getTranslationY() + mPhotoView.getHeight() - mScrollY
-                : mPhotoView.getHeight() - mScrollY;
+        return Integer.MAX_VALUE;
     }
 }
