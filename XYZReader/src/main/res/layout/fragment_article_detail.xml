@@ -19,6 +19,7 @@
                     android:id="@+id/appBar"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
+                    android:elevation="@dimen/appbar_elevation"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     android:fitsSystemWindows="true">
 
