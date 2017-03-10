@@ -5,11 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.xyzreader.ui.ObservableScrollView
-        android:id="@+id/scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
             <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -117,7 +112,5 @@
                     app:layout_anchorGravity="bottom|end"/>
 
         </android.support.design.widget.CoordinatorLayout>
-
-    </com.example.xyzreader.ui.ObservableScrollView>
 
 </com.example.xyzreader.ui.DrawInsetsFrameLayout>
