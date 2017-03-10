@@ -9,7 +9,8 @@
     android:elevation="@dimen/card_elevation"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?selectableItemBackground">
+    android:foreground="?selectableItemBackground"
+    app:theme="@style/AppTheme.NoActionBar.Card">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +47,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="16dp"
-            android:textColor="#6000"
+            android:textColor="@color/dimgray"
             android:maxLines="1"
             android:singleLine="true"
             android:ellipsize="end" />
