@@ -47,7 +47,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="16dp"
-            android:textColor="@color/dimgray"
+            android:textColor="@color/ltgray"
             android:maxLines="1"
             android:singleLine="true"
             android:ellipsize="end" />
