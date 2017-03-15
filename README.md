@@ -1,10 +1,6 @@
-# My Movies Curator
-Android app displaying general and detailed informations about trending movies.
+# XYZ Reader
+Android app demonstrating key features of the Material Design Library.
 
-### Movie DB API Key is required.
+No special steps are required to run the application. Download the source code, open it in Android Studio, follow the IDE directions and very soon you will be able to launch the app in a phone or tablet of your choice.
 
-In order for the application to work a an API Key for themoviedb.org must be included with the build
-
-We recommend to obtain a key via the following [instructions](https://www.themoviedb.org/faq/api?language=en), and include the unique key for the build by adding the following line to [USER_HOME]/.gradle/gradle.properties
-
-`MyMovieDBApiKey="<UNIQUE_API_KEY">`
+### Once you have selected an article, swipe to your left or your right to view another one.
