@@ -151,7 +151,7 @@ public class ArticleDetailFragment extends Fragment implements
         AppBarLayout appBarLayout = (AppBarLayout) mRootView.findViewById(R.id.appBar);
 
 
-
+        // Checking if the cursor holds data before populating the views
         if (mCursor != null) {
             mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
@@ -180,6 +180,7 @@ public class ArticleDetailFragment extends Fragment implements
                         }
                     });
 
+            // Logic populating AppBar with article title in when it is collapsed
             appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
                 boolean isShow = false;
                 int scrollRange = -1;
